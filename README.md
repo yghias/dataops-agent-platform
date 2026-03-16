@@ -46,17 +46,17 @@ At a high level, the repository contains:
 - `infrastructure/`: baseline deployment and environment notes
 
 Reference docs:
-- [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md)
-- [`DATA_MODEL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_MODEL.md)
-- [`PIPELINES.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/PIPELINES.md)
-- [`DATA_CONTRACTS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_CONTRACTS.md)
-- [`SCHEMA_EVOLUTION.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/SCHEMA_EVOLUTION.md)
-- [`BACKFILL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/BACKFILL.md)
-- [`COST_PERFORMANCE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/COST_PERFORMANCE.md)
-- [`AGENT_DESIGN.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/AGENT_DESIGN.md)
-- [`API_INTEGRATIONS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/API_INTEGRATIONS.md)
-- [`WORKFLOWS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/WORKFLOWS.md)
-- [`GOVERNANCE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/GOVERNANCE.md)
+- [`ARCHITECTURE.md`](ARCHITECTURE.md)
+- [`DATA_MODEL.md`](DATA_MODEL.md)
+- [`PIPELINES.md`](PIPELINES.md)
+- [`DATA_CONTRACTS.md`](DATA_CONTRACTS.md)
+- [`SCHEMA_EVOLUTION.md`](SCHEMA_EVOLUTION.md)
+- [`BACKFILL.md`](BACKFILL.md)
+- [`COST_PERFORMANCE.md`](COST_PERFORMANCE.md)
+- [`AGENT_DESIGN.md`](AGENT_DESIGN.md)
+- [`API_INTEGRATIONS.md`](API_INTEGRATIONS.md)
+- [`WORKFLOWS.md`](WORKFLOWS.md)
+- [`GOVERNANCE.md`](GOVERNANCE.md)
 
 ## Quick start
 
@@ -86,9 +86,9 @@ python -m workflows.intake_workflow
 ## Review path
 
 Start with these files:
-1. [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md)
-2. [`DATA_MODEL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_MODEL.md)
-3. [`models/marts/mart_sales_pipeline.sql`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/models/marts/mart_sales_pipeline.sql)
-4. [`src/orchestration/runtime.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/src/orchestration/runtime.py)
-5. [`src/tools/query_optimizer/tool.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/src/tools/query_optimizer/tool.py)
-6. [`governance/approval_policy.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/governance/approval_policy.md)
+1. [`ARCHITECTURE.md`](ARCHITECTURE.md)
+2. [`DATA_MODEL.md`](DATA_MODEL.md)
+3. [`models/marts/mart_sales_pipeline.sql`](models/marts/mart_sales_pipeline.sql)
+4. [`src/orchestration/runtime.py`](src/orchestration/runtime.py)
+5. [`src/tools/query_optimizer/tool.py`](src/tools/query_optimizer/tool.py)
+6. [`governance/approval_policy.md`](governance/approval_policy.md)

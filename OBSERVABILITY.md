@@ -48,4 +48,4 @@ The repository proposes dashboard groups for:
 - governance and approvals
 - Snowflake model freshness and reconciliation health
 
-See [`dashboards/metrics.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/dashboards/metrics.md) for suggested KPIs.
+See [`dashboards/metrics.md`](dashboards/metrics.md) for suggested KPIs.
