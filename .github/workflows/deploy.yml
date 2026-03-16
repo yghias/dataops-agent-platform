@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run workflow tests
-        run: python -m compileall agents workflows tools memory tests
+        run: python -m compileall src agents workflows tools memory tests airflow
       - name: Build container image
         run: docker build -t dataops-agent-platform:${GITHUB_SHA} .
       - name: Publish deployment note

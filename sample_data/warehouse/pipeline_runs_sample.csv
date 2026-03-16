@@ -1,0 +1,4 @@
+run_id,pipeline_id,dag_id,status,started_at,ended_at,retry_count,error_class,error_message,environment
+run_001,crm_opportunity_pipeline_daily,crm_opportunity_pipeline_daily,success,2026-03-15T05:00:00,2026-03-15T05:06:12,0,,,prod
+run_002,crm_opportunity_pipeline_daily,crm_opportunity_pipeline_daily,failed,2026-03-16T05:00:00,2026-03-16T05:07:18,2,schema_drift,column win_probability missing,prod
+run_003,query_history_ingestion,query_history_ingestion,success,2026-03-16T05:00:00,2026-03-16T05:03:01,0,,,prod

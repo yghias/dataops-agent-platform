@@ -1,0 +1,3 @@
+query_id,warehouse_name,user_name,schema_name,query_text,query_hash,bytes_scanned,rows_produced,execution_ms,started_at,completed_at
+q_001,TRANSFORM_WH,svc_transform,marts,"select * from marts.pipeline_health_mart",hash_001,84201984,120,9200,2026-03-16T05:10:00,2026-03-16T05:10:09
+q_002,BI_WH,analyst_user,marts,"select pipeline_id, avg_runtime_seconds from marts.pipeline_health_mart",hash_002,1048576,24,420,2026-03-16T06:00:00,2026-03-16T06:00:00

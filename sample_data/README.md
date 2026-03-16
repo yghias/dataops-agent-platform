@@ -1,10 +1,16 @@
 # Sample Data
 
-This directory holds small, non-sensitive assets used to illustrate ingestion shape, warehouse contracts, and example requests.
+This directory holds non-sensitive datasets used to reproduce common platform issues and validate warehouse models.
+
+## Included scenarios
+
+- pipeline failures from Airflow metadata
+- late arriving data affecting freshness checks
+- schema drift events from the registry
+- duplicates in landed operational datasets
+- slow query patterns in warehouse query history
 
 ## Contents
 
-- `requests/`: example request payloads for platform workflows
-- `warehouse/`: small CSV extracts aligned to the Snowflake SQL assets in this repository
-
-The sample data is intentionally limited to keep the repository lightweight while still making the SQL models and workflow examples concrete.
+- `requests/`: task payloads used by orchestration examples
+- `warehouse/`: CSV datasets aligned to Snowflake staging and mart logic

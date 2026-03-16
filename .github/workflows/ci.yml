@@ -17,10 +17,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Compile Python
-        run: python -m compileall agents workflows tools memory
+        run: python -m compileall src agents workflows tools memory tests airflow
       - name: Ruff
-        run: ruff check agents workflows tools memory
+        run: ruff check src agents workflows tools memory tests
       - name: Pytest
         run: pytest -q
       - name: Validate SQL assets
-        run: test -f models/marts/mart_sales_pipeline.sql && test -f sql/tests/test_pipeline_amount_non_negative.sql
+        run: test -f sql/schema.sql && test -f sql/marts.sql && test -f sql/tests.sql && test -f models/marts/mart_sales_pipeline.sql

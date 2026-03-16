@@ -36,9 +36,8 @@ Primary request families:
 ## Repository layout
 
 At a high level, the repository contains:
-- `agents/`: specialist agents with clear input and output contracts
-- `tools/`: adapters for SQL execution, metadata, lineage, query analysis, documentation, and quality checks
-- `workflows/`: intake, approval, execution, and feedback flows
+- `src/`: runtime control-plane code for agents, tools, routing, and workflow helpers
+- `airflow/`: DAGs for metadata ingestion, quality checks, and diagnostics
 - `memory/`: prompt registry, decision logging, and feedback storage
 - `governance/`: approval and audit operating model
 - `models/`: dbt-style Snowflake models and model-level tests
@@ -50,6 +49,8 @@ Reference docs:
 - [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md)
 - [`DATA_MODEL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_MODEL.md)
 - [`PIPELINES.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/PIPELINES.md)
+- [`AGENT_DESIGN.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/AGENT_DESIGN.md)
+- [`API_INTEGRATIONS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/API_INTEGRATIONS.md)
 - [`WORKFLOWS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/WORKFLOWS.md)
 - [`GOVERNANCE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/GOVERNANCE.md)
 
@@ -84,6 +85,6 @@ Start with these files:
 1. [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md)
 2. [`DATA_MODEL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_MODEL.md)
 3. [`models/marts/mart_sales_pipeline.sql`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/models/marts/mart_sales_pipeline.sql)
-4. [`workflows/intake_workflow.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/workflows/intake_workflow.py)
-5. [`tools/query_optimizer.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/tools/query_optimizer.py)
+4. [`src/orchestration/runtime.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/src/orchestration/runtime.py)
+5. [`src/tools/query_optimizer/tool.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/src/tools/query_optimizer/tool.py)
 6. [`governance/approval_policy.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/governance/approval_policy.md)
