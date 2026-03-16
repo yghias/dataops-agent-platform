@@ -1,0 +1,20 @@
+name: deploy
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build container image
+        run: docker build -t dataops-agent-platform:${GITHUB_SHA} .
+      - name: Deployment note
+        run: echo "Production deployment should be attached to protected environments and approval gates."
