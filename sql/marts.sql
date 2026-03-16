@@ -49,3 +49,72 @@ select
     max(completed_at) as latest_completion_at
 from platform.agent_tasks
 group by 1, 2, 3;
+
+create or replace view marts.agent_review_outcomes_mart as
+select
+    t.assigned_agent,
+    t.request_type,
+    t.environment,
+    count(r.recommendation_id) as total_recommendations,
+    count_if(h.review_decision = 'approved') as approved_recommendations,
+    count_if(h.review_decision = 'rejected') as rejected_recommendations,
+    round(count_if(h.review_decision = 'approved') / nullif(count(r.recommendation_id), 0), 4) as approval_rate,
+    avg(datediff('minute', t.submitted_at, h.reviewed_at)) as avg_minutes_to_review
+from platform.agent_tasks t
+left join platform.agent_recommendations r
+    on t.task_id = r.task_id
+left join platform.human_reviews h
+    on r.recommendation_id = h.recommendation_id
+group by 1, 2, 3;
+
+create or replace view marts.schema_drift_mart as
+select
+    source_system,
+    entity_name,
+    drift_type,
+    date_trunc('day', effective_at) as effective_day,
+    count(*) as drift_events
+from platform.schema_versions
+where drift_type is not null
+group by 1, 2, 3, 4;
+
+create or replace view marts.backfill_operations_mart as
+select
+    asset_name,
+    approval_status,
+    request_status,
+    count(*) as backfill_requests,
+    avg(datediff('day', start_date, end_date)) as avg_backfill_days
+from platform.backfill_requests
+group by 1, 2, 3;
+
+create or replace view marts.semantic_metrics_mart as
+with pipeline_metrics as (
+    select
+        pipeline_id as metric_entity,
+        'pipeline_success_rate' as metric_name,
+        pipeline_success_rate::number(18,4) as metric_value,
+        latest_completed_at as measured_at
+    from marts.pipeline_health_mart
+),
+quality_metrics as (
+    select
+        asset_name as metric_entity,
+        'data_quality_score' as metric_name,
+        data_quality_score::number(18,4) as metric_value,
+        measured_day::timestamp_ntz as measured_at
+    from marts.data_quality_mart
+),
+latency_metrics as (
+    select
+        query_hash as metric_entity,
+        'query_latency_ms' as metric_name,
+        avg_execution_ms::number(18,4) as metric_value,
+        current_timestamp() as measured_at
+    from marts.query_performance_mart
+)
+select * from pipeline_metrics
+union all
+select * from quality_metrics
+union all
+select * from latency_metrics;

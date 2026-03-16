@@ -128,3 +128,40 @@ create or replace table platform.schema_versions (
     drift_type varchar,
     effective_at timestamp_ntz not null
 );
+
+create or replace table platform.data_contracts (
+    contract_id varchar primary key,
+    source_system varchar not null,
+    entity_name varchar not null,
+    version_number number(10,0) not null,
+    required_columns variant not null,
+    optional_columns variant,
+    allowed_ranges variant,
+    status varchar not null,
+    created_at timestamp_ntz not null,
+    updated_at timestamp_ntz not null
+);
+
+create or replace table platform.backfill_requests (
+    backfill_request_id varchar primary key,
+    task_id varchar references platform.agent_tasks(task_id),
+    asset_name varchar not null,
+    requested_by varchar not null,
+    start_date date not null,
+    end_date date not null,
+    request_status varchar not null,
+    approval_status varchar not null,
+    requested_at timestamp_ntz not null,
+    approved_at timestamp_ntz
+);
+
+create or replace table platform.api_ingestion_logs (
+    ingestion_log_id varchar primary key,
+    source_name varchar not null,
+    endpoint_name varchar not null,
+    http_status number(10,0) not null,
+    records_received number(18,0),
+    latency_ms number(18,0),
+    ingestion_status varchar not null,
+    ingested_at timestamp_ntz not null
+);

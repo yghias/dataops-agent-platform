@@ -56,3 +56,29 @@ where entity_name = 'pipeline_runs'
       schema_payload:"columns"[0] is null
       or schema_payload:"columns" is null
   );
+
+-- review reconciliation: every approved execution must have a prior approved review
+select e.execution_event_id
+from platform.execution_events e
+left join platform.human_reviews h
+    on e.recommendation_id = h.recommendation_id
+where e.execution_status in ('executed', 'succeeded')
+  and coalesce(h.review_decision, 'missing') <> 'approved';
+
+-- backfill overlap detection
+select
+    a.backfill_request_id as request_a,
+    b.backfill_request_id as request_b,
+    a.asset_name
+from platform.backfill_requests a
+join platform.backfill_requests b
+    on a.asset_name = b.asset_name
+   and a.backfill_request_id <> b.backfill_request_id
+   and a.start_date <= b.end_date
+   and b.start_date <= a.end_date;
+
+-- semantic metric completeness check
+select metric_name
+from marts.semantic_metrics_mart
+group by 1
+having count(*) = 0;

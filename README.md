@@ -42,6 +42,9 @@ At a high level, the repository contains:
 - `governance/`: approval and audit operating model
 - `models/`: dbt-style Snowflake models and model-level tests
 - `sql/`: DDL, marts, quality checks, and reconciliation queries
+- `sql/contracts/`: contract validation queries for upstream schemas
+- `sql/backfill/`: approval and overlap validation for historical rebuilds
+- `sql/analytics/`: incident debugging and diagnostic warehouse queries
 - `sample_data/`: source payload and warehouse sample data references
 - `infrastructure/`: baseline deployment and environment notes
 

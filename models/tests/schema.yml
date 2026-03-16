@@ -23,3 +23,36 @@ models:
         tests: [not_null]
       - name: pipeline_amount
         tests: [not_null]
+
+  - name: stg_pipeline_runs
+    columns:
+      - name: run_id
+        tests: [not_null, unique]
+      - name: pipeline_id
+        tests: [not_null]
+
+  - name: stg_query_history
+    columns:
+      - name: query_id
+        tests: [not_null, unique]
+      - name: query_hash
+        tests: [not_null]
+
+  - name: stg_agent_tasks
+    columns:
+      - name: task_id
+        tests: [not_null, unique]
+
+  - name: pipeline_health_mart
+    columns:
+      - name: pipeline_id
+        tests: [not_null]
+      - name: pipeline_success_rate
+        tests: [not_null]
+
+  - name: data_quality_mart
+    columns:
+      - name: asset_name
+        tests: [not_null]
+      - name: data_quality_score
+        tests: [not_null]
