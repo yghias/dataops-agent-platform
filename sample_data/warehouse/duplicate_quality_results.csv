@@ -1,0 +1,3 @@
+quality_result_id,run_id,asset_id,check_name,check_type,measured_value,threshold_value,status,measured_at
+qr_001,run_001,asset_001,row_count_change,row_count,100,50,pass,2026-03-15T05:10:00
+qr_001,run_001,asset_001,row_count_change,row_count,100,50,pass,2026-03-15T05:10:00

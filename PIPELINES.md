@@ -7,6 +7,7 @@ The platform supports four pipeline families:
 - warehouse transformation
 - semantic/reporting publication
 - feedback and audit persistence
+- historical backfill and reprocessing
 
 ## Ingestion pattern
 
@@ -47,3 +48,11 @@ Standard DAG expectations:
 - validation failures should stop downstream promotion
 - reconciliation mismatches should raise a reviewable operational event
 - approved rollback steps must exist for schema and publication changes
+
+## Backfill pipeline
+
+Backfills are orchestrated separately from scheduled pipelines:
+- require explicit scope by date range or partition
+- rerun staging, transformation, and mart publication in order
+- rerun data quality and reconciliation checks before publish
+- log execution outcomes in control-plane metadata

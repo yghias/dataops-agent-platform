@@ -1,0 +1,4 @@
+event_id,pipeline_id,event_ts,arrival_ts,status
+evt_001,crm_opportunity_pipeline_daily,2026-03-14T05:00:00,2026-03-14T05:01:00,on_time
+evt_002,crm_opportunity_pipeline_daily,2026-03-15T05:00:00,2026-03-15T07:35:00,late
+evt_003,crm_opportunity_pipeline_daily,2026-03-16T05:00:00,2026-03-16T05:01:00,on_time

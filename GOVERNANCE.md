@@ -26,6 +26,9 @@ Controls how schema details, metadata, and outputs are handled for sensitive or 
 ### Change policy
 Defines which artifacts are generation-only and which may proceed to execution after approval.
 
+### Contract policy
+Defines required columns, accepted types, allowed ranges, and schema drift handling for upstream systems.
+
 ## Review model
 
 Minimum review expectations:

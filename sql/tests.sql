@@ -47,3 +47,12 @@ from platform.data_quality_results q
 left join platform.data_assets a
     on q.asset_id = a.asset_id
 where a.asset_id is null;
+
+-- contract validation: required platform pipeline columns must exist in latest schema version
+select schema_version_id
+from platform.schema_versions
+where entity_name = 'pipeline_runs'
+  and (
+      schema_payload:"columns"[0] is null
+      or schema_payload:"columns" is null
+  );

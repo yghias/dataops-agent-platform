@@ -14,6 +14,34 @@ The repository uses a layered model structure:
 
 ## Core entities
 
+### `platform.agent_tasks`
+- control-plane request intake records
+- tracks request type, assigned agent, environment, and approval requirement
+
+### `platform.agent_recommendations`
+- generated artifacts emitted by specialist agents
+- stores artifact path, confidence score, and review state
+
+### `platform.human_reviews`
+- reviewer decisions for generated outputs
+- records approval, rejection, revision requests, and notes
+
+### `platform.execution_events`
+- post-approval execution records
+- links approved recommendations to dry-run or execution events
+
+### `platform.pipeline_runs`
+- Airflow and pipeline runtime telemetry
+- source of truth for pipeline success rate, retries, and failure analysis
+
+### `platform.query_history`
+- Snowflake workload telemetry
+- used for cost, latency, and optimization analysis
+
+### `platform.schema_versions`
+- upstream schema registry snapshots
+- used to detect added, renamed, and type-changed columns
+
 ### `raw.crm_accounts`
 - account-level source extract
 - loaded from CRM API into Snowflake landing tables

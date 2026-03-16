@@ -31,6 +31,8 @@ Warehouse validation should include:
 - mart-level non-negative and lifecycle consistency checks
 - reconciliation between source and published marts
 - metric-level assertions for KPI tables
+- contract validation for upstream schema versions
+- backfill rerun validation for affected partitions
 
 ## Production extension
 

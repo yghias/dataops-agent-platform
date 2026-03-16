@@ -19,6 +19,8 @@ class AgentRouter:
         prompt = task.prompt.lower()
         if any(token in prompt for token in ("query", "optimize", "slow")):
             return RouteDecision("database_engineer_agent", ["dba_agent"], "Query optimization request.")
+        if any(token in prompt for token in ("failure", "failed", "anomaly", "debug")):
+            return RouteDecision("observability_agent", ["data_engineer_agent"], "Incident and observability request.")
         if any(token in prompt for token in ("pipeline", "airflow", "dbt", "transformation")):
             return RouteDecision("data_engineer_agent", ["cloud_data_platform_agent"], "Pipeline and SQL transformation request.")
         if any(token in prompt for token in ("schema", "contract", "model")):
@@ -29,6 +31,4 @@ class AgentRouter:
             return RouteDecision("data_scientist_agent", ["ai_ml_engineer_agent"], "Feature generation request.")
         if any(token in prompt for token in ("rag", "evaluation", "model pipeline")):
             return RouteDecision("ai_ml_engineer_agent", [], "AI/ML platform request.")
-        if any(token in prompt for token in ("failure", "anomaly", "debug")):
-            return RouteDecision("observability_agent", ["data_engineer_agent"], "Incident and observability request.")
         return RouteDecision("documentation_agent", [], "Default routing for documentation and review packaging.")

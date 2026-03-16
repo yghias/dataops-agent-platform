@@ -18,6 +18,7 @@ Recommended signals:
 - execution success rate for approved artifacts
 - Snowflake validation pass rate by model and mart
 - Airflow task retry counts for generated DAGs
+- backfill run success rate and partition completion lag
 
 ## Artifact quality observability
 

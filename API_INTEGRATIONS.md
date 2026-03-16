@@ -56,6 +56,17 @@ Use cases:
 - severity and impact analysis
 - incident debugging
 
+Example payload:
+```json
+{
+  "alert_id": "alert_771",
+  "alert_type": "freshness_breach",
+  "asset_name": "marts.pipeline_health_mart",
+  "severity": "high",
+  "opened_at": "2026-03-16T05:16:00Z"
+}
+```
+
 ### Warehouse query history
 Use cases:
 - slow query analysis

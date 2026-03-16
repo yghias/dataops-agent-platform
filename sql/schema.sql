@@ -83,6 +83,7 @@ create or replace table platform.agent_tasks (
     assigned_agent varchar not null,
     approval_required boolean not null,
     submitted_at timestamp_ntz not null,
+    updated_at timestamp_ntz,
     completed_at timestamp_ntz
 );
 
@@ -94,7 +95,28 @@ create or replace table platform.agent_recommendations (
     confidence_score number(5,4) not null,
     artifact_path varchar not null,
     review_status varchar not null,
+    review_version number(10,0) default 1,
     created_at timestamp_ntz not null
+);
+
+create or replace table platform.human_reviews (
+    review_id varchar primary key,
+    task_id varchar not null references platform.agent_tasks(task_id),
+    recommendation_id varchar not null references platform.agent_recommendations(recommendation_id),
+    reviewer_role varchar not null,
+    review_decision varchar not null,
+    review_notes varchar,
+    reviewed_at timestamp_ntz not null
+);
+
+create or replace table platform.execution_events (
+    execution_event_id varchar primary key,
+    task_id varchar not null references platform.agent_tasks(task_id),
+    recommendation_id varchar not null references platform.agent_recommendations(recommendation_id),
+    execution_status varchar not null,
+    executed_by varchar not null,
+    execution_notes varchar,
+    executed_at timestamp_ntz not null
 );
 
 create or replace table platform.schema_versions (
