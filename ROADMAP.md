@@ -9,6 +9,7 @@
 - connect SQL runner to a real warehouse
 - integrate metadata and lineage sources
 - add API endpoints and UI-friendly response shapes
+- add dbt invocation and Snowflake test execution support
 
 ## Phase 3: Control plane hardening
 - policy-as-code enforcement
@@ -27,3 +28,4 @@
 - environment promotion rules
 - integration runbooks
 - artifact signing and retention
+- policy-backed release approvals for warehouse and orchestration assets

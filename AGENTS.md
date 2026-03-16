@@ -7,6 +7,7 @@ The platform is built around domain specialists rather than a monolithic assista
 - explicit input and output contracts
 - constrained tool access
 - a quality and governance role in the larger workflow
+- a bias toward SQL-first outputs for warehouse-facing work
 
 This structure makes the system easier to review, safer to operate, and more credible in enterprise settings.
 
@@ -41,11 +42,12 @@ Focus:
 - ingestion and transformation workflows
 - ETL/ELT design
 - orchestration-aware implementation patterns
+- Snowflake staging and curated model generation
 
 Typical outputs:
 - pipeline specifications
 - incremental load logic
-- implementation notes for Airflow and dbt
+- implementation notes for Airflow and dbt-style SQL assets
 
 ### DataArchitectAgent
 Focus:
@@ -82,6 +84,7 @@ Focus:
 - KPI logic
 - semantic metric definitions
 - BI-ready query patterns
+- stable SQL publication for business-facing marts
 
 ### DataScientistAgent
 Focus:

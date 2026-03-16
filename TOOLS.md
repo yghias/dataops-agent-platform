@@ -7,12 +7,12 @@ Tools are modeled as constrained platform capabilities, not arbitrary function c
 - define input and output shape
 - advertise read/write/execute risk
 - support logging and evidence capture
-- be easy to mock during local evaluation
+- make warehouse-facing logic reviewable independently from orchestration code
 
 ## Current tools
 
 ### SQL Runner
-Executes read-only SQL against a mock or integrated engine. Supports query limits, explain-plan style diagnostics, and execution metadata capture.
+Executes read-only Snowflake SQL, explain plans, and bounded result previews with request-level audit metadata.
 
 ### Schema Inspector
 Returns column, datatype, primary key, foreign key, and table-level metadata used by modeling and optimization agents.
@@ -30,7 +30,7 @@ Runs heuristic checks over SQL text to identify anti-patterns and provide target
 Builds Airflow DAG scaffolds with retries, SLA hooks, task grouping, and idempotent load patterns.
 
 ### dbt Generator
-Creates dbt models, tests, source YAML, and documentation blocks aligned to analytics engineering practices.
+Creates dbt-style SQL models, tests, source YAML, and documentation blocks aligned to warehouse-first transformation practices.
 
 ### Documentation Generator
 Assembles technical docs and runbooks from structured inputs such as assumptions, failure modes, owners, and remediation steps.

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This runbook covers basic operation of the local portfolio implementation and mirrors the structure expected in a real internal platform runbook.
+This runbook covers local operation, review flows, and failure handling for `dataops-agent-platform`.
 
 ## Starting the platform locally
 
@@ -22,13 +22,13 @@ python -m workflows.intake_workflow
 
 ### Inspect decision logs
 - open `memory/store/decision_log.jsonl`
-- correlate with request IDs and artifact IDs
+- correlate with request IDs, artifact references, and reviewer decisions
 
 ### Troubleshoot low-quality output
 - check which tools were invoked
 - inspect quality checker warnings
 - review prompt version in the prompt registry
-- compare against accepted examples
+- compare against prior accepted request patterns
 
 ## Failure patterns
 
@@ -58,3 +58,20 @@ Actions:
 - confirm artifact approval status
 - verify requester role and environment
 - inspect governance policy notes
+
+## Recovery guidance
+
+### Rebuild generated artifacts
+- rerun intake workflow with updated request context
+- confirm the correct agent route was selected
+- validate SQL artifacts before regenerating orchestration assets
+
+### Snowflake validation before release
+- run staging and mart SQL in non-production
+- execute reconciliation queries in `sql/reconciliation`
+- confirm data quality checks in `sql/tests`
+
+### Rollback expectations
+- do not promote failed marts or invalidated DAGs
+- revert to last approved SQL artifact set
+- record rollback context in the decision log when the rollback is associated with an approved change

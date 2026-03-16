@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_crm_accounts
+    columns:
+      - name: account_id
+        tests: [not_null, unique]
+
+  - name: stg_crm_opportunities
+    columns:
+      - name: opportunity_id
+        tests: [not_null, unique]
+      - name: account_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_crm_accounts')
+              field: account_id
+
+  - name: mart_sales_pipeline
+    columns:
+      - name: snapshot_date
+        tests: [not_null]
+      - name: pipeline_amount
+        tests: [not_null]

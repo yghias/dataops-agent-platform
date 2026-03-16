@@ -19,8 +19,9 @@ class ExecutionResult:
 class ExecutionWorkflow:
     """Executes only approved artifacts.
 
-    This repository uses a simulated execution path to demonstrate
-    governance boundaries without requiring live infrastructure.
+    The current implementation uses a dry-run execution path so the
+    governance boundary is explicit without requiring a live warehouse
+    or Airflow deployment.
     """
 
     def run(self, request_id: str, approved: bool, environment: str) -> ExecutionResult:

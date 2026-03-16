@@ -14,7 +14,16 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run workflow tests
+        run: python -m compileall agents workflows tools memory tests
       - name: Build container image
         run: docker build -t dataops-agent-platform:${GITHUB_SHA} .
-      - name: Deployment note
-        run: echo "Production deployment should be attached to protected environments and approval gates."
+      - name: Publish deployment note
+        run: |
+          echo "Deployment target should be bound to protected staging and production environments."
+          echo "Snowflake and Airflow credentials must be injected by environment-level secrets."

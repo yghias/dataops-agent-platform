@@ -25,6 +25,7 @@ from tools.metadata_reader import MetadataReader
 from tools.quality_checker import QualityChecker
 from tools.query_optimizer import QueryOptimizer
 from tools.schema_inspector import SchemaInspector
+from tools.sql_runner import SqlRunner
 from workflows.approval_workflow import ApprovalWorkflow
 
 
@@ -40,6 +41,7 @@ class IntakeWorkflow:
             "dbt_generator": DbtGenerator(),
             "doc_generator": DocGenerator(),
             "query_optimizer": QueryOptimizer(),
+            "sql_runner": SqlRunner(),
             "quality": QualityChecker(),
         }
         self.agents = [
@@ -72,13 +74,18 @@ class IntakeWorkflow:
         return "general"
 
     def run(self, prompt: str, requester_role: str = "data_engineer", environment: str = "dev") -> dict:
+        inferred_title = "Request review package"
+        if "pipeline" in prompt.lower():
+            inferred_title = "Pipeline implementation package"
+        if "query" in prompt.lower() or "sql" in prompt.lower():
+            inferred_title = "SQL optimization package"
         task = TaskRequest(
             request_id=f"req-{uuid4()}",
             requester_role=requester_role,
             prompt=prompt,
             environment=environment,
             domain=self.classify_domain(prompt),
-            context={"title": "Generated from intake workflow", "owner": requester_role},
+            context={"title": inferred_title, "owner": requester_role},
         )
         route = self.router.route(task)
         selected = [agent for agent in self.agents if agent.name in {route.primary_agent, *route.supporting_agents}]
@@ -94,8 +101,10 @@ class IntakeWorkflow:
 
 def main() -> None:
     workflow = IntakeWorkflow()
-    sample = workflow.run("Generate an Airflow DAG and observability plan for daily CRM to warehouse ingestion.")
-    pprint(sample["approval_packet"])
+    review_packet = workflow.run(
+        "Generate an Airflow DAG, Snowflake staging model, and observability package for daily CRM to warehouse ingestion."
+    )
+    pprint(review_packet["approval_packet"])
 
 
 if __name__ == "__main__":

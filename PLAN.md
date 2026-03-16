@@ -672,7 +672,7 @@ dataops-agent-platform/
 ├── notebooks/
 │   ├── evaluation/
 │   ├── experimentation/
-│   └── demos/
+│   └── operations/
 ├── dashboards/
 │   ├── operations/
 │   ├── quality/
@@ -692,7 +692,7 @@ dataops-agent-platform/
 - `memory/`: storage contracts for task history, artifacts, and prompt versions
 - `governance/`: policy files, approval models, and audit logic
 - `src/`: runtime application code, API surfaces, orchestration engine, and shared services
-- `examples/`: representative user requests, expected outputs, and demo assets
+- `examples/`: representative user requests, expected outputs, and operational references
 - `docs/`: operational and architectural documentation
 
 ## 9. Example Use Cases
@@ -766,9 +766,9 @@ Planned workflow:
 - Reviewer Agent checks completeness
 - Human reviewer approves operational guidance before publishing
 
-## 10. Portfolio Positioning
+## 10. Organizational Value
 
-This project should be framed not just as an AI demo, but as an enterprise-grade control plane for applied AI in data operations.
+This project should be framed as an enterprise-grade control plane for applied AI in data operations.
 
 ### Senior Data Engineer
 Demonstrates:
@@ -831,8 +831,8 @@ Demonstrates:
 - ability to unify architecture, engineering, operations, governance, and database concerns
 - strong judgment about where AI should assist versus where humans must remain in control
 
-### Overall portfolio value
-As a portfolio piece, `dataops-agent-platform` signals the ability to design and implement:
+### Overall organizational value
+`dataops-agent-platform` is intended to show how an engineering organization can design and implement:
 - enterprise-grade AI platforms
 - governed automation for data ecosystems
 - practical multi-agent orchestration
@@ -863,7 +863,7 @@ This plan should be implemented in phases:
 - Add evaluation notebooks, dashboards, and quality reporting
 
 ### Phase 5: Portfolio and production polish
-- Add real examples, decision logs, sample outputs, architecture diagrams, and end-to-end demos
+- Add real examples, decision logs, sample outputs, architecture diagrams, and end-to-end operational flows
 - Strengthen CI/CD, testing, deployment controls, and runbooks
 
 The implementation should prioritize safe generation, transparent reasoning, modular agent design, and explicit human control at every stage where recommendations could become operational change.

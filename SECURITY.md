@@ -11,6 +11,8 @@ This repository models a secure-by-default approach for AI-assisted data operati
 - separate read-only inspection from write execution
 - mask secrets and restricted fields in all persisted output
 - require human approval before any material execution step
+- separate Snowflake reader, transformer, and publisher roles
+- restrict production execution paths to approved service identities
 
 ## Threat considerations
 
@@ -32,3 +34,4 @@ Generated code must not bypass peer review or change-control processes.
 - add policy-as-code enforcement
 - support stronger identity and session binding
 - add artifact signing and retention rules
+- add Snowflake role mapping and schema-level access policies

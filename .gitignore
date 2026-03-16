@@ -3,9 +3,12 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+.dbt/
+target/
 *.pyc
 *.pyo
 .DS_Store
-memory/store/
+memory/store/*.jsonl
 dist/
 build/

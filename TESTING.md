@@ -9,10 +9,11 @@ The platform should be validated at three levels:
 
 ## Current repository focus
 
-This repository emphasizes reviewable code structure and representative logic rather than exhaustive runtime integration. The testable seams are deliberately clear:
+The current repository emphasizes reviewable control-flow code plus SQL assets that can be validated independently. The testable seams are deliberately clear:
 - tool classes are deterministic
 - workflows accept typed inputs and return typed outputs
 - memory stores are file-backed and easy to inspect
+- Snowflake SQL assets are organized so they can be executed or linted independently from Python workflows
 
 ## Recommended initial test suite
 
@@ -22,6 +23,14 @@ This repository emphasizes reviewable code structure and representative logic ra
 - approval workflow state transition rules
 - decision log persistence and reload behavior
 - query optimizer recommendation coverage for common anti-patterns
+
+## SQL validation scope
+
+Warehouse validation should include:
+- staging uniqueness and not-null checks
+- mart-level non-negative and lifecycle consistency checks
+- reconciliation between source and published marts
+- metric-level assertions for KPI tables
 
 ## Production extension
 

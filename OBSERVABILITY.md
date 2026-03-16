@@ -16,6 +16,8 @@ Recommended signals:
 - approval turnaround time
 - rejection rate by artifact type
 - execution success rate for approved artifacts
+- Snowflake validation pass rate by model and mart
+- Airflow task retry counts for generated DAGs
 
 ## Artifact quality observability
 
@@ -43,5 +45,6 @@ The repository proposes dashboard groups for:
 - platform operations
 - artifact quality
 - governance and approvals
+- Snowflake model freshness and reconciliation health
 
 See [`dashboards/metrics.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/dashboards/metrics.md) for suggested KPIs.

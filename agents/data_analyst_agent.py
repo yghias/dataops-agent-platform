@@ -14,8 +14,9 @@ class DataAnalystAgent(BaseAgent):
         metric_name = task.context.get("metric_name", "monthly_active_customers")
         metadata = self.tools["metadata"].read_metric(metric_name)
         sql = (
-            "select date_trunc('month', activity_date) as activity_month,\n"
-            "       count(distinct customer_id) as monthly_active_customers\n"
+            "select\n"
+            "    date_trunc('month', activity_date) as activity_month,\n"
+            "    count(distinct customer_id) as monthly_active_customers\n"
             "from analytics.customer_activity\n"
             "where activity_flag = true\n"
             "group by 1"
@@ -24,7 +25,8 @@ class DataAnalystAgent(BaseAgent):
             f"## KPI Definition: `{metric_name}`\n"
             "- Grain: calendar month\n"
             "- Entity: unique active customer\n"
-            "- Inclusion rule: customer must have at least one qualifying activity during the month\n\n"
+            "- Inclusion rule: customer must have at least one qualifying activity during the month\n"
+            "- Publication layer: analytics mart backed by Snowflake SQL\n\n"
             f"```sql\n{sql}\n```\n"
         )
         return AgentResult(

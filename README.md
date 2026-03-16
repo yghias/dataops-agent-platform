@@ -1,22 +1,23 @@
 # dataops-agent-platform
 
-`dataops-agent-platform` is a human-in-the-loop multi-agent AI platform for data engineering, architecture, database, cloud, analytics, and AI/ML workflows. It helps teams generate draft artifacts such as ETL designs, Airflow DAGs, dbt models, SQL optimizations, schema reviews, runbooks, and governance evidence, while ensuring that humans stay in control of approval and execution.
+`dataops-agent-platform` is a governed multi-agent platform for data engineering, architecture, database, analytics, cloud platform, and AI/ML operating workflows. The service generates reviewable drafts for SQL models, Airflow DAGs, warehouse checks, architecture decisions, runbooks, and operational guidance while preserving explicit human approval before execution or promotion.
 
-The repository is designed as a production-style portfolio project rather than a toy chatbot. It emphasizes:
+The repository is organized as an internal engineering platform codebase. It emphasizes:
 - specialist agents instead of a single general assistant
 - policy-aware routing and tool access
 - explicit human review before execution
 - auditability, feedback capture, and reusable memory
+- SQL-first warehouse modeling with Snowflake as the reference platform
 - strong documentation and operational structure
 
-## What the platform does
+## Platform responsibilities
 
 The platform accepts a request, classifies it, routes it to the right specialist agents, invokes constrained tools, generates draft outputs, runs a reviewer pass, and packages results for human approval. Approved outputs can then move into a controlled execution workflow, while rejected outputs are logged for continuous improvement.
 
-Supported request families include:
+Primary request families:
 - ETL/ELT pipeline generation
 - Airflow DAG creation
-- dbt model and test generation
+- Snowflake SQL model and test generation
 - SQL generation and optimization
 - schema and data model review
 - architecture review and platform guidance
@@ -25,28 +26,32 @@ Supported request families include:
 - documentation and runbook generation
 - feature pipeline and ML workflow support
 
-## Why this repo matters
+## Platform boundaries
 
-Most AI examples stop at prompt engineering. This repository focuses on the harder enterprise problem: how to apply AI safely to production data work. It demonstrates:
-- orchestration across multiple domain specialists
-- governance and approval controls
-- recoverable workflows with traceability
-- reusable tool contracts
-- artifact memory and decision logging
-- documentation that reflects real platform concerns
+- Agents may inspect metadata, generate SQL, propose DAGs, and assemble review packages.
+- Agents may not execute production changes without approval.
+- Transformations belong in SQL models wherever practical.
+- Python is reserved for ingestion, orchestration, workflow control, integrations, and ML-specific utilities.
 
-## Architecture summary
+## Repository layout
 
 At a high level, the repository contains:
 - `agents/`: specialist agents with clear input and output contracts
-- `tools/`: tool adapters for SQL, metadata, lineage, query analysis, documentation, and quality checks
+- `tools/`: adapters for SQL execution, metadata, lineage, query analysis, documentation, and quality checks
 - `workflows/`: intake, approval, execution, and feedback flows
 - `memory/`: prompt registry, decision logging, and feedback storage
 - `governance/`: approval and audit operating model
-- `examples/`: realistic request examples
-- `sql/`: sample warehouse assets used by the tools and examples
+- `models/`: dbt-style Snowflake models and model-level tests
+- `sql/`: DDL, marts, quality checks, and reconciliation queries
+- `sample_data/`: source payload and warehouse sample data references
+- `infrastructure/`: baseline deployment and environment notes
 
-See [`PLAN.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/PLAN.md) for the implementation blueprint and [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md) for the runtime model.
+Reference docs:
+- [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md)
+- [`DATA_MODEL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_MODEL.md)
+- [`PIPELINES.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/PIPELINES.md)
+- [`WORKFLOWS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/WORKFLOWS.md)
+- [`GOVERNANCE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/GOVERNANCE.md)
 
 ## Quick start
 
@@ -57,25 +62,28 @@ pip install -r requirements.txt
 python -m workflows.intake_workflow
 ```
 
-This repository ships with mock implementations and sample assets so the orchestration model can be reviewed without requiring live warehouse credentials.
+## Development assumptions
+
+- warehouse: Snowflake
+- orchestration: Airflow
+- transformation style: SQL-heavy, dbt-style model layout
+- deployment environments: `dev`, `staging`, `prod`
+- approval requirement: mandatory for production-impacting outputs
+
+## Operating model
+
+1. Intake workflow normalizes a request and selects specialist agents.
+2. Selected agents gather schema, lineage, metadata, and SQL context.
+3. SQL-first artifacts are generated for transformations, marts, tests, and reporting logic.
+4. Reviewer and quality logic package the result for human approval.
+5. Approved artifacts move into execution controls, audit logs, and feedback capture.
 
 ## Review path
 
-If you want the fastest tour of the repository, review these first:
+Start with these files:
 1. [`ARCHITECTURE.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/ARCHITECTURE.md)
-2. [`AGENTS.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/AGENTS.md)
-3. [`workflows/intake_workflow.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/workflows/intake_workflow.py)
-4. [`tools/query_optimizer.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/tools/query_optimizer.py)
-5. [`memory/decision_log.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/memory/decision_log.py)
-
-## Human-in-the-loop design
-
-The platform deliberately separates generation from execution.
-
-- Agents can draft recommendations and code.
-- Reviewer logic scores and critiques the draft.
-- Humans approve, reject, or request changes.
-- Decisions are logged with rationale.
-- Only approved outputs can enter the execution workflow.
-
-This pattern makes the platform realistic for regulated, production-sensitive data environments.
+2. [`DATA_MODEL.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/DATA_MODEL.md)
+3. [`models/marts/mart_sales_pipeline.sql`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/models/marts/mart_sales_pipeline.sql)
+4. [`workflows/intake_workflow.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/workflows/intake_workflow.py)
+5. [`tools/query_optimizer.py`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/tools/query_optimizer.py)
+6. [`governance/approval_policy.md`](/Users/yasserghias/Documents/Playground/dataops-agent-platform/governance/approval_policy.md)

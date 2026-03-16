@@ -21,4 +21,6 @@ jobs:
       - name: Ruff
         run: ruff check agents workflows tools memory
       - name: Pytest
-        run: pytest -q || true
+        run: pytest -q
+      - name: Validate SQL assets
+        run: test -f models/marts/mart_sales_pipeline.sql && test -f sql/tests/test_pipeline_amount_non_negative.sql

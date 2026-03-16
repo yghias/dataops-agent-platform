@@ -1,10 +1,10 @@
-"""Metadata reader for assets and business metrics."""
+"""Metadata reader for Snowflake assets and business metrics."""
 
 from __future__ import annotations
 
 
 class MetadataReader:
-    """Mock metadata access layer."""
+    """Returns static metadata aligned to the SQL assets in this repository."""
 
     def read_asset(self, asset_name: str) -> dict:
         return {
@@ -13,6 +13,8 @@ class MetadataReader:
             "owner": "data-platform",
             "slo": "daily by 06:00 America/Detroit",
             "classification": "internal",
+            "warehouse": "snowflake",
+            "steward": "analytics-engineering",
         }
 
     def read_metric(self, metric_name: str) -> dict:
@@ -20,5 +22,5 @@ class MetadataReader:
             "metric_name": metric_name,
             "canonical_owner": "analytics-engineering",
             "status": "draft",
-            "notes": "No canonical definition exists yet in the mock catalog.",
+            "notes": "Metric should be sourced from SQL in models/marts and reviewed before publication.",
         }

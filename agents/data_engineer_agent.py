@@ -13,6 +13,11 @@ class DataEngineerAgent(BaseAgent):
     def run(self, task: TaskRequest) -> AgentResult:
         lineage = self.tools["lineage"].get_lineage(task.context.get("asset", "stg_orders"))
         quality_plan = self.tools["quality"].recommend_checks("pipeline")
+        dbt_model = self.tools["dbt_generator"].generate_model(
+            model_name="stg_crm_opportunities",
+            source_name="raw",
+            source_table="crm_opportunities",
+        )
         dag = self.tools["dag_generator"].generate(
             dag_id=task.context.get("dag_id", "daily_orders_ingestion"),
             schedule=task.context.get("schedule", "0 5 * * *"),
@@ -23,7 +28,9 @@ class DataEngineerAgent(BaseAgent):
             "## Proposed Pipeline Design\n"
             "- Land source extracts into a raw zone partitioned by load date.\n"
             "- Apply idempotent staging logic with watermark-based incremental ingestion.\n"
-            "- Publish curated warehouse models with test coverage before downstream exposure.\n\n"
+            "- Publish curated Snowflake models with test coverage before downstream exposure.\n\n"
+            "## Transformation Draft\n"
+            f"```sql\n{dbt_model['sql']}\n```\n"
             "## Orchestration Draft\n"
             f"```python\n{dag}\n```\n"
         )
@@ -40,5 +47,6 @@ class DataEngineerAgent(BaseAgent):
             evidence=[
                 ToolEvidence("lineage_tool", "Checked upstream/downstream dependency expectations.", lineage),
                 ToolEvidence("quality_checker", "Suggested baseline pipeline quality controls.", quality_plan),
+                ToolEvidence("dbt_generator", "Generated incremental Snowflake SQL scaffold.", dbt_model),
             ],
         )

@@ -12,4 +12,4 @@ flowchart LR
     G --> H
 ```
 
-This markdown source is paired with `docs/overview.png`, which is a generated placeholder image for environments that expect static diagram assets.
+This markdown source is paired with `docs/overview.png`, which is kept as a static diagram asset for environments that expect image references.

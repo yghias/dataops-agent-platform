@@ -35,6 +35,16 @@ Minimum review expectations:
 - deployment-affecting changes: platform reviewer
 - production execution: authorized approver and audit record
 
+## Approval matrix
+
+| Change type | Minimum reviewer | Additional requirements |
+| --- | --- | --- |
+| KPI SQL change | Analytics engineering | Business owner sign-off if canonical metric changes |
+| Snowflake mart change | Data engineering | Warehouse validation and reconciliation queries |
+| Schema or DDL recommendation | DBA or data architect | Rollback and maintenance window plan |
+| Airflow DAG change | Data engineering | Retry and idempotency review |
+| Production execution request | Authorized approver | Prior approved artifact and execution logging |
+
 ## Continuous improvement
 
 Governance data should be used to identify:

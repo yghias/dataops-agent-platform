@@ -17,6 +17,7 @@ Purpose:
 - assess domain and risk
 - route to the best specialist agents
 - gather initial context
+- assemble the SQL, metadata, and governance context required for a reviewable output package
 
 Inputs:
 - freeform request text
@@ -36,6 +37,12 @@ Purpose:
 - enforce reviewer and policy gates
 - record human approval or rejection
 
+Approval package contents:
+- generated SQL or workflow artifacts
+- quality and policy findings
+- evidence from schema, metadata, lineage, and explain-plan tools
+- reviewer action requested
+
 Key controls:
 - explicit reviewer identity
 - decision reason capture
@@ -52,7 +59,7 @@ Controls:
 - approved artifact required
 - environment and risk checks
 - explicit execution event logging
-- simulated mode supported in this repo
+- SQL and warehouse checks must pass before downstream publication
 
 ## Feedback workflow
 
@@ -60,6 +67,7 @@ Purpose:
 - capture structured reviewer feedback
 - store acceptance and rejection reasons
 - support prompt, routing, and quality improvements
+- preserve which SQL patterns and operating approaches were accepted over time
 
 ## Workflow state model
 

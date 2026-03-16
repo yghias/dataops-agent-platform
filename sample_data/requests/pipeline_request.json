@@ -1,0 +1,13 @@
+{
+  "request_id": "req-example-pipeline-001",
+  "requester_role": "data_engineer",
+  "environment": "staging",
+  "prompt": "Build a daily Airflow and Snowflake pipeline for CRM opportunities with quality checks and a sales pipeline mart.",
+  "desired_artifact": "pipeline_package",
+  "context": {
+    "source_system": "crm",
+    "dag_id": "crm_opportunity_pipeline_daily",
+    "target_table": "analytics.mart_sales_pipeline",
+    "schedule": "0 5 * * *"
+  }
+}
